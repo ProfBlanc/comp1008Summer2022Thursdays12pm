@@ -167,13 +167,127 @@ public class Week9 {
         }
 
     }
-    static void example7(){}
-    static void example8(){}
-    static void example9(){}
-    static void example10(){}
+    static void example7(){
+        //evoke your own exception
+        //ask user for an even number
+            //if not a number of number is odd
+
+        System.out.print("Enter a number: ");
+        try{
+            //open connection
+            int number = input.nextInt();
+            //thr+tab
+            if(number % 2 == 1)
+                throw new IllegalArgumentException(number + " is not even!!!");
+
+            System.out.printf("The number %d is even! Thank you. %n", number);
+        }
+        catch (InputMismatchException e){
+            System.err.println("Number not valid");
+        }
+        catch (IllegalArgumentException e){
+            System.err.println(e.getMessage());
+        }
+        finally {
+            System.out.println("Run every single time. Used to release resources");
+            //closing arguments
+        }
+
+
+    }
+    static void example8(){
+        System.out.print("Enter a number: ");
+        try{
+            //open connection
+            int number = input.nextInt();
+            //thr+tab
+            if(number % 2 == 1)
+                throw new NumberIsNotEvenException(number + " is not even!!!");
+
+            System.out.printf("The number %d is even! Thank you. %n", number);
+        }
+        catch (InputMismatchException e){
+            System.err.println("Number not valid");
+        }
+        catch (NumberIsNotEvenException e){
+            System.err.println(e.getMessage());
+        }
+
+    }
+    static void example9() throws NumberIsNotEvenException
+    {
+        throw new NumberIsNotEvenException("Hold on!");
+    }
+    static void example12() throws InputMismatchException
+    {
+        throw new InputMismatchException("Hold on!");
+    }
+
+    static void example11(){
+        example12();
+    }
+    static void example10(){
+
+        //throwing exception of Java.lang or java.util
+        try {
+            example9();
+        }
+        catch (NumberIsNotEvenException e){
+            System.err.println(e);
+        }
+    }
+    static void example13(){
+        try{
+            throw new Exception("No good!");
+        }
+        catch (Exception e){
+            e.printStackTrace();
+
+            System.out.println();
+           StackTraceElement[] elements =  e.getStackTrace();
+           for(StackTraceElement current : elements){
+
+               String fileName = current.getFileName();
+               int line = current.getLineNumber();
+               String method = current.getMethodName();
+
+               System.err.printf("Error on line %d of file %s using method %s%n", line, fileName, method);
+           }
+        }
+    }
+    static void example14(){
+        //chain an exception
+
+        try{
+
+            try{
+                throw new Exception("My product has a defect");
+            }
+            catch (Exception e){
+                throw new Exception("You handle this", e);
+            }
+
+
+        }
+        catch (Exception e){
+            //System.err.println(e);
+            e.printStackTrace();
+        }
+    }
+    static void example15(){
+        try {
+            Animal a1 = new Animal("Lion");
+            System.out.println(a1);
+            Animal a2 = new Animal("bcd");
+            System.out.println(a2);
+        }
+        catch (DoesNotContainVowel e){
+            System.err.println(e.getMessage());
+        }
+    }
     public static void main(String[] args) {
 
-        example6();
+        example15();
     }
 
     /*
@@ -186,4 +300,23 @@ public class Week9 {
                     the index that user inputted
                     a sorry message
      */
+
+
+    /*
+    Create a class named Animal
+        1 String instance variable: name
+        2 constructors
+            default
+            1 arg
+
+        getter
+        setter
+            if the name does not contain a vowel
+                throw an exception
+                    custom exception
+                unhandled inside of method
+                but handled by the caller
+
+     */
+
 }
