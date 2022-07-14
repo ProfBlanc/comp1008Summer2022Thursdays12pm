@@ -1,5 +1,7 @@
 package ca.georgiancollege.copr.comp1008.week8;
 
+import java.util.Scanner;
+
 //public class SampleClass1 extends Container, Room{
 public class SampleClass1 implements InterfaceSample1, InterfaceSample2{
 

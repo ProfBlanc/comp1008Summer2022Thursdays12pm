@@ -124,6 +124,10 @@ public class Week8 {
 
          */
 
+        System.out.println("hello"  == "hello");
+        System.out.println("hello".equals("hello"));
+        int num = 1;
+        //System.out.println(num.equals(1));
 
     }
 
